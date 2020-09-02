@@ -105,12 +105,14 @@ class SeleniumTestCase(StaticLiveServerTestCase):
     def get_browserstack_browser(cls):
         browser, browser_version, browserstack_os, browserstack_os_version = os.environ["BROWSER"].split(":")
         caps = {
-            'browserName': browser,
+            # 'browser' has precedence over 'browserName'
+            # 'browserName': browser,
             'resolution': '1600x1200',
             'browser': browser,
             'browser_version': browser_version,
             'os': browserstack_os,
-            'os_version': browserstack_os_version
+            'os_version': browserstack_os_version,
+            'browserstack.local': True
         }
         # Disable slow script warning in IE
         caps["prerun"] = {
