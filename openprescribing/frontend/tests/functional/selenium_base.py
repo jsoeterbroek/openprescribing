@@ -112,7 +112,8 @@ class SeleniumTestCase(StaticLiveServerTestCase):
             'browser_version': browser_version,
             'os': browserstack_os,
             'os_version': browserstack_os_version,
-            'browserstack.local': True
+            'project': os.environ["BROWSERSTACK_PROJECT_NAME"],
+            'name': os.environ["BROWSERSTACK_BUILD_NAME"]
         }
         # Disable slow script warning in IE
         caps["prerun"] = {
