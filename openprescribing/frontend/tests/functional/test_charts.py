@@ -13,10 +13,6 @@ class MapTest(SeleniumTestCase):
             + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map"
         )
         print(self.browser.title)
-        # verify whether the socket is bound or not!
-        s = socket.socket()
-        s.bind(('localhost', 6080))
-        print(s)
 
         # Await map
         self.find_by_xpath("//*[@class='leaflet-zoom-animated' and name()='svg']")
