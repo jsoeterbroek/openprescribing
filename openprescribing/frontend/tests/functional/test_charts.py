@@ -6,53 +6,16 @@ class MapTest(SeleniumTestCase):
     # These tests run against a MockAPIServer started by the
     # custom_runner
     def test_map_slider(self):
-        print(self.live_server_url)
-        response = self.browser.get(
-            self.live_server_url
-            + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map"
-        )
+        response = self.browser.get("https://www.google.com")
+        print("Google response:")
         print(response)
-        # Await map
-        self.find_by_xpath("//*[@class='leaflet-zoom-animated' and name()='svg']")
-
-        # In the default month (Sept) there is one "maximum" value
-        self.assertEqual(
-            len(
-                self.browser.find_elements_by_xpath(
-                    "//*[@fill='#67001f' and name()='path']"
-                )
-            ),
-            1,
-        )
-        self.assertEqual(
-            self.find_by_xpath("//p[@class='chart-sub-title']").text, "in Sep '16"
-        )
-
-        # Move the slider
-        #
-        # The firefox webdriver doesn't currently support mouse
-        # events, so we have to inject them straight into the browser.
-        js = """
-        var slider = $('#chart-date-slider');
-        slider.val(0);
-        slider.trigger('change');
-        """
-        self.browser.execute_script(js)
-
-        # Check the values for Gravesend have changed as expected
-        self.assertEqual(
-            len(
-                self.browser.find_elements_by_xpath(
-                    "//*[@fill='#67001f' and name()='path']"
-                )
-            ),
-            2,
-        )
-        self.assertEqual(
-            self.find_by_xpath("//p[@class='chart-sub-title']").text, "in Apr '13"
-        )
+        if not "Google" in self.browser.title:
+            raise Exception("Unable to load google page!")
+        elem = self.browser.find_element_by_name("q")
+        elem.send_keys("BrowserStack")
+        elem.submit()
+        print(self.browser.title)
         self.browser.quit()
-
 
 class SmallListTest(SeleniumTestCase):
     # These tests run against a MockAPIServer started by the
