@@ -99,14 +99,14 @@ class SeleniumTestCase(StaticLiveServerTestCase):
 
     @classmethod
     def get_browserstack_browser(cls):
-        browser, browser_version, os, os_version = os.environ["BROWSER"].split(":")
+        browser, browser_version, browserstack_os, browserstack_os_version = os.environ["BROWSER"].split(":")
         caps = {
             'browserName': browser,
             'resolution': '1600x1200',
             'browser': browser,
             'browser_version': browser_version,
-            'os': os,
-            'os_version': os_version
+            'os': browserstack_os,
+            'os_version': browserstack_os_version
         }
         # Disable slow script warning in IE
         caps["prerun"] = {
