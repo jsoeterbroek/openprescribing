@@ -40,7 +40,11 @@ class SeleniumTestCase(StaticLiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
-        cls.port = next(available_test_ports)
+        if os.environ.get("GITHUB_ACTIONS"):
+            cls.port = 6080
+        else:
+            cls.port = next(available_test_ports)
+
         try:
             cls.browser = cls.get_browser()
         except Exception:
