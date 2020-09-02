@@ -7,11 +7,11 @@ class MapTest(SeleniumTestCase):
     # custom_runner
     def test_map_slider(self):
         print(self.live_server_url)
-        self.browser.get(
+        response = self.browser.get(
             self.live_server_url
             + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map"
         )
-
+        print(response)
         # Await map
         self.find_by_xpath("//*[@class='leaflet-zoom-animated' and name()='svg']")
 
