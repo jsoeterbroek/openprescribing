@@ -12,7 +12,7 @@ class MapTest(SeleniumTestCase):
             self.live_server_url
             + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map"
         )
-        print(self.browser.title)
+        print(self.browser.page_source)
 
         # Await map
         self.find_by_xpath("//*[@class='leaflet-zoom-animated' and name()='svg']")
