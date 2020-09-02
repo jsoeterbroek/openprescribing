@@ -24,6 +24,8 @@ services:
       - USE_SAUCELABS=${USE_SAUCELABS}
       - GOOGLE_APPLICATION_CREDENTIALS=/code/google-credentials.json
       - GITHUB_ACTIONS=${GITHUB_ACTIONS}
+      - BROWSERSTACK_USERNAME=${BROWSERSTACK_USERNAME}
+      - BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}
     extra_hosts:
       - saucehost:${SAUCE_HOST-127.0.0.1}
     ports:
