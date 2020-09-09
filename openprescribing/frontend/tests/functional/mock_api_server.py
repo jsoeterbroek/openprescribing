@@ -30,7 +30,7 @@ class MockApiRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         o = urllib.parse.urlparse(self.path)
         q = urllib.parse.parse_qs(o.query)
-        data = {}
+        data = ''
         if "/spending_by_org" in o.path and "ccg" in q.get("org_type"):
             code = q.get("code")[0]
             if code == "2.12":
@@ -98,6 +98,7 @@ class MockApiRequestHandler(BaseHTTPRequestHandler):
         else:
             logger.error("Unhandled path %s" % self.path)
             self.send_response(requests.codes.not_found)
+            data = '{}'
         self.send_header("Content-Type", "application/json")
         self.send_header("access-control-allow-origin", "*")
         self.end_headers()
