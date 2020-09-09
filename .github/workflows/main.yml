@@ -34,12 +34,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Retrieve Google Cloud credentials
-        run: ./.github/scripts/decrypt_secret.sh
-        env:
-          GOOGLE_CLOUD_GITHUB_ACTIONS_PASSPHRASE: ${{ secrets.GOOGLE_CLOUD_GITHUB_ACTIONS_PASSPHRASE }}
       - name: 'BrowserStack Env Setup'
         uses: 'browserstack/github-actions/setup-env@master'
         with:
@@ -47,12 +41,18 @@ jobs:
           access-key: ${{ secrets.BROWSERSTACK_ACCESS_KEY }}
           build-name: BUILD_INFO
           project-name: REPO_NAME
-      - name: 'BrowserStackLocal Setup'
+      - name: 'BrowserStack Local Tunnel Setup'
         uses: 'browserstack/github-actions/setup-local@master'
         with:
           local-testing: start
           local-identifier: random
           local-logging-level: all-logs 
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Retrieve Google Cloud credentials
+        run: ./.github/scripts/decrypt_secret.sh
+        env:
+          GOOGLE_CLOUD_GITHUB_ACTIONS_PASSPHRASE: ${{ secrets.GOOGLE_CLOUD_GITHUB_ACTIONS_PASSPHRASE }}
       - name: Functional tests
         run: docker-compose run --service-ports test && docker-compose run --service-ports test-production
         env:

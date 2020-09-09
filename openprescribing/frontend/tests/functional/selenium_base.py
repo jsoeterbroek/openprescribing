@@ -105,6 +105,7 @@ class SeleniumTestCase(StaticLiveServerTestCase):
     def get_browserstack_browser(cls):
         browser, browser_version, browserstack_os, browserstack_os_version = os.environ["BROWSER"].split(":")
         localIdentifier = os.environ['BROWSERSTACK_LOCAL_IDENTIFIER']
+        print("localIdentifier", localIdentifier)
         caps = {
             # 'browser' has precedence over 'browserName'
             # 'browserName': browser,
