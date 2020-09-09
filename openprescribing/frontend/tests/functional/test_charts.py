@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from .selenium_base import SeleniumTestCase
 import socket
+import urllib.request
 
 class MapTest(SeleniumTestCase):
     # These tests run against a MockAPIServer started by the
@@ -8,6 +9,9 @@ class MapTest(SeleniumTestCase):
     def test_map_slider(self):
         print(self.live_server_url
             + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map")
+        contents = urllib.request.urlopen(self.live_server_url
+            + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map").read()
+        print(contents)
         self.browser.get(
             self.live_server_url
             + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map"
