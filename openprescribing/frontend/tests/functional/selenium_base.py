@@ -35,7 +35,7 @@ def use_browserstack():
 )
 class SeleniumTestCase(StaticLiveServerTestCase):
 
-    # host = "localhost"
+    host = "0.0.0.0"
     display = None
 
     @classmethod
