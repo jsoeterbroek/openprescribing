@@ -52,6 +52,7 @@ jobs:
         with:
           local-testing: start
           local-identifier: random
+          local-logging-level: all-logs 
       - name: Functional tests
         run: docker-compose run --service-ports test && docker-compose run --service-ports test-production
         env:
