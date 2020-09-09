@@ -13,8 +13,8 @@ class MapTest(SeleniumTestCase):
             + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map").read()
         print(contents)
         self.browser.get(
-            # self.live_server_url
-            'http://localhost:6080'
+            self.live_server_url
+            # 'http://localhost:6080'
             + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map"
         )
         print(self.browser.page_source)
