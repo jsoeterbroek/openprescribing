@@ -46,7 +46,7 @@ jobs:
         with:
           local-testing: start
           local-identifier: random
-          local-logging-level: all-logs 
+          local-logging-level: all-logs
       - name: Checkout
         uses: actions/checkout@v2
       - name: Retrieve Google Cloud credentials
