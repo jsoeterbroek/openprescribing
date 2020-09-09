@@ -1,26 +1,20 @@
 # -*- coding: utf-8 -*-
 from .selenium_base import SeleniumTestCase
 import socket
-import urllib.request
 
 class MapTest(SeleniumTestCase):
     # These tests run against a MockAPIServer started by the
     # custom_runner
     def test_map_slider(self):
-        print(self.live_server_url
-            + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map")
-        contents = urllib.request.urlopen(self.live_server_url
-            + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map").read()
-        print(contents)
         self.browser.get(
             self.live_server_url
-            # 'http://localhost:6080'
             + "/analyse/#org=CCG&numIds=0212000AA&denomIds=2.12&selectedTab=map"
         )
-        print(self.browser.page_source)
+        print("BLAHA", 1)
 
         # Await map
         self.find_by_xpath("//*[@class='leaflet-zoom-animated' and name()='svg']")
+        print("BLAHA", 1)
 
         # In the default month (Sept) there is one "maximum" value
         self.assertEqual(
@@ -31,9 +25,11 @@ class MapTest(SeleniumTestCase):
             ),
             1,
         )
+        print("BLAHA", 1)
         self.assertEqual(
             self.find_by_xpath("//p[@class='chart-sub-title']").text, "in Sep '16"
         )
+        print("BLAHA", 1)
 
         # Move the slider
         #
@@ -45,6 +41,7 @@ class MapTest(SeleniumTestCase):
         slider.trigger('change');
         """
         self.browser.execute_script(js)
+        print("BLAHA", 1)
 
         # Check the values for Gravesend have changed as expected
         self.assertEqual(
@@ -55,9 +52,11 @@ class MapTest(SeleniumTestCase):
             ),
             2,
         )
+        print("BLAHA", 1)
         self.assertEqual(
             self.find_by_xpath("//p[@class='chart-sub-title']").text, "in Apr '13"
         )
+        print("BLAHA", 1)
 
 class SmallListTest(SeleniumTestCase):
     # These tests run against a MockAPIServer started by the
