@@ -61,18 +61,21 @@ class GeneralFrontendTest(SeleniumTestCase):
             "/analyse/",
         ]:
             url = self.live_server_url + url
+            print(url)
             self.browser.get(url)
             self.find_by_xpath('//a[@class="feedback-show"]')  # Wait for button load
             try:
                 el = self.find_visible_by_xpath('//a[@class="feedback-show"]')
                 el.click()
             except TypeError as e:
+                print(e)
                 e.args += ("at URL %s" % url,)
                 raise
 
             expected_url = "{}/feedback/?from_url={}".format(
                 self.live_server_url, quote_plus(url)
             )
+            print(expected_url)
             self.assertEqual(self.browser.current_url, expected_url)
 
     def test_drug_name_typeahead(self):
